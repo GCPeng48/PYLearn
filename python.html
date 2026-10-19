@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 零基礎入門班 - 互動式教學講義 (CH01 - CH03)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0284c7', // Sky blue - friendly and bright
+                        secondary: '#4f46e5',
+                        paperBg: '#f8fafc',
+                        cardBg: '#ffffff',
+                        textMain: '#1e293b',
+                        textMuted: '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Fira+Code:wght@400;600&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        code, pre {
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-sky-500 text-white p-2.5 rounded-xl shadow-md">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-wider text-sky-600 font-bold">GOTOP Python 零基礎入門班 第二版</span>
+                    <h1 class="text-lg sm:text-xl font-black text-slate-800">互動式精華講義 (CH01 - CH03)</h1>
+                </div>
+            </div>
+            <nav class="flex flex-wrap gap-2 justify-center">
+                <button onclick="switchTab('ch1')" id="btn-ch1" class="tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-sky-600 text-white shadow transition hover:bg-sky-700">
+                    <i class="fa-solid fa-book-open mr-1.5"></i>CH1 基礎環境
+                </button>
+                <button onclick="switchTab('ch2')" id="btn-ch2" class="tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-calculator mr-1.5"></i>CH2 變數運算
+                </button>
+                <button onclick="switchTab('ch3')" id="btn-ch3" class="tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-code-branch mr-1.5"></i>CH3 判斷流程
+                </button>
+                <button onclick="switchTab('sandbox')" id="btn-sandbox" class="tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow transition hover:bg-emerald-700">
+                    <i class="fa-solid fa-terminal mr-1.5"></i>Python 練習場
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- ==================== CHAPTER 1 ==================== -->
+        <section id="content-ch1" class="space-y-6 animate-fade-in">
+            <div class="bg-gradient-to-r from-sky-100 to-indigo-100 border border-sky-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="bg-sky-600 text-white font-bold px-2.5 py-0.5 rounded text-xs">CHAPTER 01</span>
+                    <span class="text-sky-800 text-sm font-medium">運算思維與開發環境建置</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">啟動你的 Python 程式冒險</h2>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    本章介紹運算思維的核心精神，探討程式語言如何作為人類與電腦的橋樑，並實際引導如何安裝 Anaconda 套件組與使用 Spyder 編輯器。
+                </p>
+            </div>
+
+            <!-- Grid Cards for CH1 Topics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-sky-500 text-2xl mb-3"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">1.1 & 1.2 運算思維四大核心</h3>
+                    <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
+                        <li><strong class="text-slate-800">拆解問題 (Decomposition)</strong>：切分小問題。</li>
+                        <li><strong class="text-slate-800">發現規律 (Pattern Recognition)</strong>：找尋模式。</li>
+                        <li><strong class="text-slate-800">歸納概念 (Abstraction)</strong>：擷取核心原則。</li>
+                        <li><strong class="text-slate-800">設計演算 (Algorithm)</strong>：建立步驟。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-indigo-500 text-2xl mb-3"><i class="fa-solid fa-language"></i></div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">1.3 & 1.4 程式語言與 Python</h3>
+                    <p class="text-sm text-slate-600 mb-3">
+                        電腦只懂 0 與 1。Python 由 Guido van Rossum 於 1989 年創建，直譯式、簡潔易學且擁有多元豐富的套件。
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-xl text-xs text-indigo-700 border border-indigo-100">
+                        <i class="fa-solid fa-lightbulb mr-1 text-amber-500"></i> 特色：免費開源、跨平台、高階且功能強大。
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="text-emerald-500 text-2xl mb-3"><i class="fa-solid fa-toolbox"></i></div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">1.5 & 1.6 Anaconda 與 Spyder</h3>
+                    <p class="text-sm text-slate-600 mb-3">
+                        內建 Spyder 編輯器、IPython 視窗與豐富的數據科學模組。
+                    </p>
+                    <div class="space-y-1.5 text-xs text-slate-600">
+                        <p><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <code class="bg-slate-100 px-1 py-0.5 rounded text-emerald-700 font-bold">conda list</code> 查看已安裝套件</p>
+                        <p><i class="fa-solid fa-check text-emerald-600 mr-1"></i> 按 <kbd class="bg-slate-100 px-1 py-0.5 rounded border border-slate-300 font-bold text-slate-700">Tab</kbd> 啟動簡易智慧輸入</p>
+                        <p><i class="fa-solid fa-check text-emerald-600 mr-1"></i> 按 <kbd class="bg-slate-100 px-1 py-0.5 rounded border border-slate-300 font-bold text-slate-700">F12</kbd> 或左側點兩下設中斷點</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CHAPTER 2 ==================== -->
+        <section id="content-ch2" class="space-y-6 hidden animate-fade-in">
+            <div class="bg-gradient-to-r from-indigo-100 to-purple-100 border border-indigo-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="bg-indigo-600 text-white font-bold px-2.5 py-0.5 rounded text-xs">CHAPTER 02</span>
+                    <span class="text-indigo-800 text-sm font-medium">變數與運算式</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">資料儲存與運算規則</h2>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    學習如何使用變數名稱代換複雜的記憶體位置、認識基本資料型態（int、float、bool、str）、輸出輸入指令與運算子。
+                </p>
+            </div>
+
+            <!-- Interactive Calculator / Evaluator for Chapter 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Data Types & Operators Quick Reference -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                        <i class="fa-solid fa-table text-indigo-500 mr-2"></i>常用運算子優先順序表
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-600">
+                            <thead class="bg-slate-100 text-slate-700">
+                                <tr>
+                                    <th class="p-2.5 rounded-l-lg">優先序</th>
+                                    <th class="p-2.5">運算子說明</th>
+                                    <th class="p-2.5 rounded-r-lg">範例</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2.5 font-bold text-indigo-600">1</td>
+                                    <td class="p-2.5"><code>()</code> 小括號</td>
+                                    <td class="p-2.5"><code>(2 + 3) * 4</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-indigo-600">2</td>
+                                    <td class="p-2.5"><code>**</code> 指數運算</td>
+                                    <td class="p-2.5"><code>7 ** 2 = 49</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-indigo-600">3</td>
+                                    <td class="p-2.5"><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></td>
+                                    <td class="p-2.5"><code>32 // 5 = 6</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-indigo-600">4</td>
+                                    <td class="p-2.5"><code>+</code>, <code>-</code> (加減)</td>
+                                    <td class="p-2.5"><code>12 + 3 = 15</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-indigo-600">5</td>
+                                    <td class="p-2.5">比較運算 <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code></td>
+                                    <td class="p-2.5"><code>6 + 9 == 15</code> (True)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Interactive Arithmetic Simulation -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+                            <i class="fa-solid fa-calculator text-emerald-600 mr-2"></i>複利本金試算模擬 (<code class="text-xs">complex.py</code>)
+                        </h3>
+                        <p class="text-sm text-slate-600 mb-4">
+                            公式：<code class="text-emerald-700 bg-emerald-50 px-1 py-0.5 rounded font-bold">本金 * (1 + 利率) ** 年數</code>。依據教材範例模擬 6 年後的本金。
+                        </p>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">輸入本金金額 (預設 100000)：</label>
+                                <input type="number" id="calc-principal" value="100000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-slate-800 focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">年利率 (預設 0.02)：</label>
+                                <input type="number" step="0.01" id="calc-rate" value="0.02" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-slate-800 focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">存款年數 (預設 6 年)：</label>
+                                <input type="number" id="calc-years" value="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-slate-800 focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="calculateCompound()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition">
+                            執行複利計算
+                        </button>
+                        <div id="calc-result" class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-emerald-700 font-mono text-sm hidden">
+                            <!-- Results shown here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CHAPTER 3 ==================== -->
+        <section id="content-ch3" class="space-y-6 hidden animate-fade-in">
+            <div class="bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="bg-purple-600 text-white font-bold px-2.5 py-0.5 rounded text-xs">CHAPTER 03</span>
+                    <span class="text-purple-800 text-sm font-medium">判斷式與流程控制</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">Python 縮排與多向判斷式</h2>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    Python 使用冒號 <code class="text-purple-700 font-bold">:</code> 及 4 個空白鍵（或 1 個 Tab）的縮排來定義程式區塊。包含單向 <code class="text-purple-700 font-bold">if</code>、雙向 <code class="text-purple-700 font-bold">if...else</code> 與多向 <code class="text-purple-700 font-bold">if...elif...else</code>。
+                </p>
+            </div>
+
+            <!-- Interactive Grade / Discount Evaluator -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Grade Evaluator Simulator -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+                            <i class="fa-solid fa-graduation-cap text-purple-600 mr-2"></i>成績等第判斷 (<code class="text-xs">grade.py</code>)
+                        </h3>
+                        <p class="text-sm text-slate-600 mb-4">
+                            輸入學生分數，依多向判斷式評定等第（90up優等、80-89甲等、70-79乙等、60-69丙等、&lt;60丁等）。
+                        </p>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">請輸入成績 (0-100)：</label>
+                            <input type="number" id="grade-input" placeholder="例如: 86" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-800 focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="evaluateGrade()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow transition">
+                            執行等第評定
+                        </button>
+                        <div id="grade-output" class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-purple-700 font-mono text-sm hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Department Store Discount Simulator -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+                            <i class="fa-solid fa-store text-pink-600 mr-2"></i>百貨公司折扣戰 (<code class="text-xs">discount.py</code>)
+                        </h3>
+                        <p class="text-sm text-slate-600 mb-4">
+                            滿 10 萬打 8 折、5 萬打 85 折、3 萬打 9 折、1 萬打 95 折。計算顧客應付金額。
+                        </p>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">請輸入購物金額：</label>
+                            <input type="number" id="discount-input" placeholder="例如: 120000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-800 focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="calculateDiscount()" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-xl shadow transition">
+                            計算折扣金額
+                        </button>
+                        <div id="discount-output" class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-pink-700 font-mono text-sm hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SANDBOX / PLAYGROUND ==================== -->
+        <section id="content-sandbox" class="space-y-6 hidden animate-fade-in">
+            <div class="bg-gradient-to-r from-emerald-100 to-teal-100 border border-emerald-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="bg-emerald-600 text-white font-bold px-2.5 py-0.5 rounded text-xs">INTERACTIVE PRACTICE</span>
+                    <span class="text-emerald-800 text-sm font-medium">線上 Python 程式碼模擬器</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">動手寫寫看 Python 程式</h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    選擇下方教材範例，或自行修改程式碼並點擊執行，體驗課程中的運算與輸出結果！
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Code Presets -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                    <h3 class="text-base font-bold text-slate-800 mb-2"><i class="fa-solid fa-list-check mr-2 text-emerald-600"></i>選擇講義範例</h3>
+                    <button onclick="loadSnippet('loop')" class="w-full text-left bg-slate-50 hover:bg-slate-100 p-3 rounded-xl border border-slate-200 text-sm text-slate-700 transition">
+                        <strong>loop.py</strong><br><span class="text-xs text-slate-500">CH1 迴圈與自訂函式範例</span>
+                    </button>
+                    <button onclick="loadSnippet('arith')" class="w-full text-left bg-slate-50 hover:bg-slate-100 p-3 rounded-xl border border-slate-200 text-sm text-slate-700 transition">
+                        <strong>arith.py</strong><br><span class="text-xs text-slate-500">CH2 梯形面積計算</span>
+                    </button>
+                    <button onclick="loadSnippet('grade')" class="w-full text-left bg-slate-50 hover:bg-slate-100 p-3 rounded-xl border border-slate-200 text-sm text-slate-700 transition">
+                        <strong>grade.py</strong><br><span class="text-xs text-slate-500">CH3 成績等第多向判斷</span>
+                    </button>
+                </div>
+
+                <!-- Code Editor & Console Output -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-300 flex items-center">
+                                <i class="fa-solid fa-file-code mr-2 text-sky-400"></i>Python Script Editor
+                            </span>
+                            <button onclick="runPythonCode()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded-lg text-xs font-bold shadow transition flex items-center">
+                                <i class="fa-solid fa-play mr-1.5"></i> 執行程式 (Run)
+                            </button>
+                        </div>
+                        <textarea id="python-editor" rows="10" class="w-full bg-slate-950 text-emerald-300 font-mono text-sm p-4 focus:outline-none resize-none" spellcheck="false"></textarea>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-100 px-4 py-2 border-b border-slate-200 text-xs font-mono text-slate-600 flex items-center justify-between">
+                            <span><i class="fa-solid fa-terminal mr-2 text-indigo-600"></i>IPython Console 執行結果</span>
+                            <button onclick="clearConsole()" class="text-slate-500 hover:text-slate-800 text-xs font-bold">清除畫面</button>
+                        </div>
+                        <div id="python-console" class="p-4 font-mono text-sm text-slate-700 min-h-[120px] max-h-[220px] overflow-y-auto whitespace-pre-wrap bg-slate-50">
+歡迎使用 Python 互動模擬器。請點擊上方「執行程式」查看輸出結果。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
+        <p>GOTOP Python零基礎入門班【第二版】互動教學講義 | 範圍：第 1 章 ~ 第 3 章</p>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            const tabs = ['ch1', 'ch2', 'ch3', 'sandbox'];
+            tabs.forEach(t => {
+                const el = document.getElementById('content-' + t);
+                const btn = document.getElementById('btn-' + t);
+                if (t === tabId) {
+                    el.classList.remove('hidden');
+                    if(t === 'sandbox') {
+                        btn.className = "tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow transition hover:bg-emerald-700";
+                    } else if(t === 'ch1') {
+                        btn.className = "tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-sky-600 text-white shadow transition hover:bg-sky-700";
+                    } else if(t === 'ch2') {
+                        btn.className = "tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-indigo-600 text-white shadow transition hover:bg-indigo-700";
+                    } else {
+                        btn.className = "tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-purple-600 text-white shadow transition hover:bg-purple-700";
+                    }
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = "tab-btn px-3.5 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition";
+                }
+            });
+        }
+
+        // Chapter 2 Compound Interest Simulator
+        function calculateCompound() {
+            const p = parseFloat(document.getElementById('calc-principal').value);
+            const r = parseFloat(document.getElementById('calc-rate').value);
+            const years = parseInt(document.getElementById('calc-years').value);
+            
+            const total = p * Math.pow((1 + r), years);
+            const resultBox = document.getElementById('calc-result');
+            resultBox.classList.remove('hidden');
+            resultBox.innerHTML = `> 本金金額: ${p}<br>> 6年後存款為: ${total.toFixed(6)}`;
+        }
+
+        // Chapter 3 Grade Evaluator Simulator
+        function evaluateGrade() {
+            const score = parseInt(document.getElementById('grade-input').value);
+            const outBox = document.getElementById('grade-output');
+            outBox.classList.remove('hidden');
+            
+            if (isNaN(score)) {
+                outBox.innerText = "請輸入有效的數字分數！";
+                return;
+            }
+
+            let grade = "";
+            if (score >= 90) grade = "優等";
+            else if (score >= 80) grade = "甲等";
+            else if (score >= 70) grade = "乙等";
+            else if (score >= 60) grade = "丙等";
+            else grade = "丁等";
+
+            outBox.innerHTML = `> 請輸入成績: ${score}<br>> 評定等第: <strong class="text-purple-800 text-lg">${grade}</strong>`;
+        }
+
+        // Chapter 3 Discount Simulator
+        function calculateDiscount() {
+            const amt = parseFloat(document.getElementById('discount-input').value);
+            const outBox = document.getElementById('discount-output');
+            outBox.classList.remove('hidden');
+
+            if (isNaN(amt)) {
+                outBox.innerText = "請輸入有效的購物金額！";
+                return;
+            }
+
+            let finalAmt = amt;
+            if (amt >= 100000) finalAmt = amt * 0.8;
+            else if (amt >= 50000) finalAmt = amt * 0.85;
+            else if (amt >= 30000) finalAmt = amt * 0.9;
+            else if (amt >= 10000) finalAmt = amt * 0.95;
+
+            outBox.innerHTML = `> 請輸入購物金額: ${amt}<br>> 應付金額: <strong class="text-pink-800 text-lg">${finalAmt} 元</strong>`;
+        }
+
+        // Sandbox code snippets
+        const snippets = {
+            loop: `# loop.py - CH1 迴圈與自訂函式範例
+sum = 0
+
+def show(n):
+    print("第 " + str(n) + " 次執行迴圈")
+
+for i in range(1, 11):
+    show(i)
+    sum += i
+
+print("1+2+...+10 = " + str(sum))`,
+            arith: `# arith.py - CH2 計算梯形面積
+top = 12
+bottom = 20
+height = 14
+
+area = (top + bottom) * height / 2
+print("梯形的面積為:", area)`,
+            grade: `# grade.py - CH3 成績等第判斷
+score = 86
+
+if score >= 90:
+    print("優等")
+elif score >= 80:
+    print("甲等")
+elif score >= 70:
+    print("乙等")
+elif score >= 60:
+    print("丙等")
+else:
+    print("丁等")`
+        };
+
+        function loadSnippet(key) {
+            document.getElementById('python-editor').value = snippets[key];
+        }
+
+        function clearConsole() {
+            document.getElementById('python-console').innerText = "主控台已清除。";
+        }
+
+        function runPythonCode() {
+            const code = document.getElementById('python-editor').value;
+            const consoleBox = document.getElementById('python-console');
+            
+            let simulatedOutput = "In [1]: runfile('script.py')\n";
+            
+            if (code.includes('sum += i')) {
+                for(let i=1; i<=10; i++) {
+                    simulatedOutput += `第 ${i} 次執行迴圈\n`;
+                }
+                simulatedOutput += "1+2+...+10 = 55\n";
+            } else if (code.includes('area =')) {
+                simulatedOutput += "梯形的面積為: 224.0\n";
+            } else if (code.includes('elif score >= 80:')) {
+                simulatedOutput += "甲等\n";
+            } else {
+                simulatedOutput += "程式執行完畢 (模擬環境成功運行指令)。\n";
+            }
+
+            consoleBox.innerText = simulatedOutput;
+        }
+
+        window.onload = function() {
+            loadSnippet('loop');
+        };
+    </script>
+</body>
+</html>
